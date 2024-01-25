@@ -57,7 +57,9 @@ const Home = () => {
             groundColor="#000000"
             intensity={1}
           />
-          <Space />
+          <Space 
+            isRotating={isRotating}
+          />
           <City
             position={cityPosition}
             scale={cityScale}
