@@ -20,9 +20,26 @@ const Home = () => {
     }
 
     return [screenScale, screenPosition, rotation];
+  };
+
+  const adjustStarshipForScreenSize = () => {
+    let screenScale, screenPosition;
+
+    if (window.innerWidth < 768) {
+      screenScale = [0.15, 0.15, 0.15]; 
+      screenPosition = [0.1, 2, 0.1]
+    } else {
+      screenScale = [0.2, 0.2, 0.2]; 
+      screenPosition = [0.1, 1.9, 0.1];
+    }
+
+    return [screenScale, screenPosition];
   }
 
+
   const [cityScale, cityPosition, cityRotation] = adjustCityScreenSizes();
+
+  const [starshipScale, starshipPosition] = adjustStarshipForScreenSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -39,12 +56,19 @@ const Home = () => {
             intensity={1}
           />
           <Space />
+          <StarShip 
+            isRotating={isRotating}
+            starshipScale={starshipScale}
+            starshipPosition={starshipPosition}
+            rotation={[0, 55, 0]}
+          />
           <City 
             position={cityPosition}
             scale={cityScale}
             rotation={cityRotation}
+            isRotating={isRotating}
+            setIsRotating={setIsRotating}
           />
-          <StarShip />
         </Suspense>
       </Canvas>
     </section>
